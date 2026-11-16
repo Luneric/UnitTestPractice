@@ -14,6 +14,13 @@ protected:
 	virtual void TearDown() {} // clean up after each test, (before destructor)
 };
 
+TEST(PasswordTest, one_character_password)
+{
+	Password my_password;
+	int actual = my_password.count_leading_characters("Z");
+	ASSERT_EQ(1, actual);
+}
+
 TEST(PasswordTest, single_letter_password)
 {
 	Password my_password;
@@ -77,4 +84,16 @@ TEST(PasswordTest, empty_string_mixed_case_false)
 {
 	Password my_password;
 	ASSERT_FALSE(my_password.has_mixed_case(""));
+}
+
+TEST(PasswordTest, lower_then_upper_at_end_true)
+{
+	Password my_password;
+	ASSERT_TRUE(my_password.has_mixed_case("passW"));
+}
+
+TEST(PasswordTest, upper_then_lower_true)
+{
+	Password my_password;
+	ASSERT_TRUE(my_password.has_mixed_case("Password"));
 }
